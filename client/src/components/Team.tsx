@@ -36,14 +36,14 @@ const Team = () => {
 
   if (loading) {
     return (
-      <section id="team" className="py-20 bg-background">
+      <section id="team" className="py-12 md:py-16 lg:py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
               Nossa <span className="bg-hero-gradient bg-clip-text text-transparent">Equipe</span>
             </h2>
             <div className="flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+              <div className="animate-spin rounded-full h-6 w-6 md:h-8 md:w-8 border-b-2 border-primary"></div>
             </div>
           </div>
         </div>
@@ -52,41 +52,41 @@ const Team = () => {
   }
 
   return (
-    <section id="team" className="py-20 bg-background">
+    <section id="team" className="py-12 md:py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
             Nossa <span className="bg-hero-gradient bg-clip-text text-transparent">Equipe</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Profissionais altamente qualificados e experientes, 
             dedicados a proporcionar o melhor cuidado para você e sua família.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12 lg:mb-16">
           {teamMembers.map((member) => (
             <Card key={member.id} className="overflow-hidden hover:shadow-card transition-smooth border-border group">
               <div className="relative overflow-hidden">
                 <img
                   src={member.imageUrl || dentistPortrait}
                   alt={member.name}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-smooth"
+                  className="w-full h-48 md:h-56 lg:h-64 object-cover group-hover:scale-105 transition-smooth"
                 />
                 <div className="absolute inset-0 bg-hero-gradient opacity-0 group-hover:opacity-10 transition-smooth"></div>
               </div>
               
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-2">
+              <CardContent className="p-4 md:p-6">
+                <h3 className="text-lg md:text-xl font-bold text-foreground mb-1 md:mb-2">
                   {member.name}
                 </h3>
-                <p className="text-primary font-medium mb-3">
+                <p className="text-sm md:text-base text-primary font-medium mb-2 md:mb-3">
                   {member.specialty}
                 </p>
-                <p className="text-muted-foreground text-sm mb-3">
+                <p className="text-xs md:text-sm text-muted-foreground mb-2 md:mb-3">
                   {member.experienceYears} anos de experiência
                 </p>
-                <p className="text-muted-foreground text-sm mb-4">
+                <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 leading-relaxed">
                   {member.credentials}
                 </p>
                 

@@ -24,10 +24,10 @@ const Hero = () => {
       
       if (data) {
         setSiteSettings({
-          siteName: data.siteName || 'DentalCare',
-          heroTitle: data.heroTitle || 'Seu sorriso é nossa prioridade',
-          heroDescription: data.heroDescription || 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
-          heroImageUrl: data.heroImageUrl || ''
+          siteName: (data as any).site_name || 'DentalCare',
+          heroTitle: (data as any).hero_title || 'Seu sorriso é nossa prioridade',
+          heroDescription: (data as any).hero_description || 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
+          heroImageUrl: (data as any).hero_image_url || ''
         });
       }
     } catch (error) {
@@ -37,17 +37,17 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-soft-gradient">
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
+      <div className="container mx-auto px-4 py-16 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="space-y-6 md:space-y-8">
+            <div className="space-y-3 md:space-y-4">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 {siteSettings.heroTitle.split(' ').slice(0, -1).join(' ')}{" "}
                 <span className="bg-hero-gradient bg-clip-text text-transparent">
                   {siteSettings.heroTitle.split(' ').slice(-1)[0]}
                 </span>
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                 {siteSettings.heroDescription}
               </p>
             </div>
@@ -65,18 +65,18 @@ const Hero = () => {
               </Button>
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-6 pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8">
               <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-accent" />
-                <span className="text-foreground font-medium">15+ Anos de Experiência</span>
+                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                <span className="text-sm md:text-base text-foreground font-medium">15+ Anos de Experiência</span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-accent" />
-                <span className="text-foreground font-medium">Tecnologia Avançada</span>
+                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                <span className="text-sm md:text-base text-foreground font-medium">Tecnologia Avançada</span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-accent" />
-                <span className="text-foreground font-medium">Atendimento Humanizado</span>
+                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                <span className="text-sm md:text-base text-foreground font-medium">Atendimento Humanizado</span>
               </div>
             </div>
           </div>
@@ -84,22 +84,22 @@ const Hero = () => {
           <div className="relative">
             <div className="relative overflow-hidden rounded-2xl shadow-hero">
               <img
-                src={siteSettings.hero_image_url || heroImage}
-                alt={`Clínica ${siteSettings.site_name} - Ambiente moderno e acolhedor`}
+                src={siteSettings.heroImageUrl || heroImage}
+                alt={`Clínica ${siteSettings.siteName} - Ambiente moderno e acolhedor`}
                 className="w-full h-auto object-cover"
               />
             </div>
             
-            {/* Floating stats card */}
-            <div className="absolute -bottom-6 -left-6 bg-card rounded-xl shadow-card p-6 border">
-              <div className="grid grid-cols-2 gap-4 text-center">
+            {/* Floating stats card - hidden on mobile */}
+            <div className="hidden md:block absolute -bottom-6 -left-6 bg-card rounded-xl shadow-card p-4 lg:p-6 border">
+              <div className="grid grid-cols-2 gap-3 lg:gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-primary">5000+</div>
-                  <div className="text-sm text-muted-foreground">Pacientes Atendidos</div>
+                  <div className="text-xl lg:text-2xl font-bold text-primary">5000+</div>
+                  <div className="text-xs lg:text-sm text-muted-foreground">Pacientes Atendidos</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-accent">98%</div>
-                  <div className="text-sm text-muted-foreground">Satisfação</div>
+                  <div className="text-xl lg:text-2xl font-bold text-accent">98%</div>
+                  <div className="text-xs lg:text-sm text-muted-foreground">Satisfação</div>
                 </div>
               </div>
             </div>

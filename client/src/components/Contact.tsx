@@ -45,49 +45,49 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-soft-gradient">
+    <section id="contact" className="py-12 md:py-16 lg:py-20 bg-soft-gradient">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
             Entre em <span className="bg-hero-gradient bg-clip-text text-transparent">Contato</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Estamos prontos para cuidar do seu sorriso. 
             Agende sua consulta ou tire suas dúvidas conosco.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Contact Form */}
           <Card className="shadow-card border-border">
-            <CardHeader>
-              <CardTitle className="text-2xl text-foreground flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-primary" />
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl md:text-2xl text-foreground flex items-center gap-2 md:gap-3">
+                <Calendar className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 Agendar Consulta
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-8">
-                <p className="text-muted-foreground mb-6">
+              <div className="text-center py-6 md:py-8">
+                <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 leading-relaxed">
                   Clique no botão abaixo para abrir o formulário completo de agendamento com seleção de data, horário e serviço.
                 </p>
                 <Button 
                   onClick={() => setAppointmentOpen(true)}
                   variant="hero" 
-                  size="lg"
-                  className="w-full"
+                  size="default"
+                  className="w-full text-sm md:text-base"
                 >
-                  <Calendar className="w-5 h-5 mr-2" />
+                  <Calendar className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                   Agendar Consulta Online
                 </Button>
               </div>
               
-              <div className="border-t pt-8 mt-8">
-                <h3 className="text-lg font-semibold mb-4">Ou envie uma mensagem:</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
+              <div className="border-t pt-6 md:pt-8 mt-6 md:mt-8">
+                <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Ou envie uma mensagem:</h3>
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label className="block text-xs md:text-sm font-medium text-foreground mb-1 md:mb-2">
                       Nome Completo
                     </label>
                     <Input
@@ -99,7 +99,7 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
+                    <label className="block text-xs md:text-sm font-medium text-foreground mb-1 md:mb-2">
                       E-mail
                     </label>
                     <Input

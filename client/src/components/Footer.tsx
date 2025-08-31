@@ -14,14 +14,14 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-foreground text-background">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
-              DentalCare
+            <h3 className="text-xl md:text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
+              Clínica Excellence
             </h3>
-            <p className="text-background/80 leading-relaxed">
+            <p className="text-sm md:text-base text-background/80 leading-relaxed">
               Cuidando do seu sorriso há mais de 15 anos. 
               Tecnologia avançada e atendimento humanizado para toda a família.
             </p>
@@ -40,8 +40,8 @@ const Footer = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-background">Serviços</h4>
-            <ul className="space-y-2 text-background/80">
+            <h4 className="text-base md:text-lg font-semibold text-background">Serviços</h4>
+            <ul className="space-y-1 md:space-y-2 text-sm md:text-base text-background/80">
               <li><a href="#services" className="hover:text-primary transition-smooth">Odontologia Geral</a></li>
               <li><a href="#services" className="hover:text-primary transition-smooth">Clareamento Dental</a></li>
               <li><a href="#services" className="hover:text-primary transition-smooth">Ortodontia</a></li>
@@ -53,8 +53,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-background">Links Rápidos</h4>
-            <ul className="space-y-2 text-background/80">
+            <h4 className="text-base md:text-lg font-semibold text-background">Links Rápidos</h4>
+            <ul className="space-y-1 md:space-y-2 text-sm md:text-base text-background/80">
               <li><a href="#home" className="hover:text-primary transition-smooth">Início</a></li>
               <li><a href="#about" className="hover:text-primary transition-smooth">Sobre Nós</a></li>
               <li><a href="#team" className="hover:text-primary transition-smooth">Nossa Equipe</a></li>
@@ -66,8 +66,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-background">Contato</h4>
-            <div className="space-y-3 text-background/80">
+            <h4 className="text-base md:text-lg font-semibold text-background">Contato</h4>
+            <div className="space-y-2 md:space-y-3 text-sm md:text-base text-background/80">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5" />
                 <div>
@@ -98,28 +98,28 @@ const Footer = () => {
         </div>
 
         {/* Emergency Banner */}
-        <div className="mt-12 p-6 bg-destructive/10 border border-destructive/20 rounded-xl">
+        <div className="mt-8 md:mt-12 p-4 md:p-6 bg-destructive/10 border border-destructive/20 rounded-xl">
           <div className="text-center">
-            <h4 className="text-lg font-semibold text-background mb-2">
+            <h4 className="text-base md:text-lg font-semibold text-background mb-2">
               Emergência Odontológica 24h
             </h4>
-            <p className="text-background/80 mb-4">
+            <p className="text-sm md:text-base text-background/80 mb-3 md:mb-4">
               Dor de dente, trauma ou urgência? Estamos aqui para ajudar!
             </p>
-            <Button variant="destructive" size="lg">
+            <Button variant="destructive" size="default" className="text-sm md:text-base">
               Ligar Agora: (11) 98888-8888
             </Button>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-background/20">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-background/60 text-sm">
-              © 2024 DentalCare. Todos os direitos reservados.
+        <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-background/20">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
+            <p className="text-background/60 text-xs md:text-sm">
+              © 2024 Clínica Excellence. Todos os direitos reservados.
             </p>
-            <p className="text-background/60 text-sm flex items-center gap-2">
-              Feito com <Heart className="w-4 h-4 text-red-500" /> para seu sorriso
+            <p className="text-background/60 text-xs md:text-sm flex items-center gap-2">
+              Feito com <Heart className="w-3 h-3 md:w-4 md:h-4 text-red-500" /> para seu sorriso
             </p>
           </div>
         </div>

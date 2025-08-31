@@ -52,42 +52,42 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-soft-gradient">
+    <section id="services" className="py-12 md:py-16 lg:py-20 bg-soft-gradient">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
             Nossos <span className="bg-hero-gradient bg-clip-text text-transparent">Serviços</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Oferecemos uma gama completa de tratamentos odontológicos 
             com tecnologia de ponta e profissionais especializados.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12 lg:mb-16">
           {services.map((service, index) => (
             <Card key={index} className="hover:shadow-card transition-smooth border-border group">
-              <CardHeader>
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-smooth">
-                    <service.icon className="w-6 h-6 text-primary" />
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 md:p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-smooth">
+                    <service.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                   </div>
-                  <CardTitle className="text-xl text-foreground">
+                  <CardTitle className="text-lg md:text-xl text-foreground">
                     {service.title}
                   </CardTitle>
                 </div>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+              <CardContent className="pt-0">
+                <p className="text-sm md:text-base text-muted-foreground mb-4 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold text-accent">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+                  <span className="text-base md:text-lg font-semibold text-accent">
                     {service.price}
                   </span>
-                  <Button variant="ghost" size="sm" className="group-hover:text-primary">
-                    Saiba mais
-                    <ArrowRight className="w-4 h-4 ml-1" />
+                  <Button variant="ghost" size="sm" className="group-hover:text-primary self-start sm:self-auto">
+                    <span className="text-sm">Saiba mais</span>
+                    <ArrowRight className="w-3 h-3 md:w-4 md:h-4 ml-1" />
                   </Button>
                 </div>
               </CardContent>
@@ -95,32 +95,32 @@ const Services = () => {
           ))}
         </div>
 
-        <div className="bg-card rounded-2xl p-8 md:p-12 shadow-card">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="bg-card rounded-xl md:rounded-2xl p-6 md:p-8 lg:p-12 shadow-card">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <h3 className="text-3xl font-bold text-foreground mb-6">
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 md:mb-6">
                 Tecnologia Avançada
               </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 leading-relaxed">
                 Investimos constantemente em equipamentos de última geração para 
                 oferecer tratamentos mais precisos, rápidos e confortáveis.
               </p>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-accent rounded-full"></div>
-                  <span className="text-muted-foreground">Radiografia digital com menor radiação</span>
+              <ul className="space-y-2 md:space-y-3 mb-4 md:mb-6">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-accent rounded-full mt-1.5 flex-shrink-0"></div>
+                  <span className="text-sm md:text-base text-muted-foreground">Radiografia digital com menor radiação</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-accent rounded-full"></div>
-                  <span className="text-muted-foreground">Scanner intraoral 3D para maior precisão</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-accent rounded-full mt-1.5 flex-shrink-0"></div>
+                  <span className="text-sm md:text-base text-muted-foreground">Scanner intraoral 3D para maior precisão</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-accent rounded-full"></div>
-                  <span className="text-muted-foreground">Laser odontológico para tratamentos menos invasivos</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-accent rounded-full mt-1.5 flex-shrink-0"></div>
+                  <span className="text-sm md:text-base text-muted-foreground">Laser odontológico para tratamentos menos invasivos</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-accent rounded-full"></div>
-                  <span className="text-muted-foreground">Sistema CAD/CAM para próteses em sessão única</span>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-accent rounded-full mt-1.5 flex-shrink-0"></div>
+                  <span className="text-sm md:text-base text-muted-foreground">Sistema CAD/CAM para próteses em sessão única</span>
                 </li>
               </ul>
               <Button variant="accent" size="lg">
