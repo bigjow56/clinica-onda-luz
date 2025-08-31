@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Phone, MapPin, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { apiClient } from "@/lib/api";
 import { AppointmentModal } from "@/components/AppointmentModal";
 
@@ -74,6 +75,9 @@ const Header = () => {
             <a href="#team" className="text-foreground hover:text-primary transition-smooth">
               Equipe
             </a>
+            <Link to="/blog" className="text-foreground hover:text-primary transition-smooth">
+              Blog
+            </Link>
             <a href="#contact" className="text-foreground hover:text-primary transition-smooth">
               Contato
             </a>
@@ -116,6 +120,9 @@ const Header = () => {
               <a href="#team" className="text-foreground hover:text-primary transition-smooth">
                 Equipe
               </a>
+              <Link to="/blog" className="text-foreground hover:text-primary transition-smooth">
+                Blog
+              </Link>
               <a href="#contact" className="text-foreground hover:text-primary transition-smooth">
                 Contato
               </a>

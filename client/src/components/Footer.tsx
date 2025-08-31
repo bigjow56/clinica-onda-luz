@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { 
   MapPin, 
   Phone, 
@@ -58,7 +59,7 @@ const Footer = () => {
               <li><a href="#about" className="hover:text-primary transition-smooth">Sobre Nós</a></li>
               <li><a href="#team" className="hover:text-primary transition-smooth">Nossa Equipe</a></li>
               <li><a href="#contact" className="hover:text-primary transition-smooth">Contato</a></li>
-              <li><a href="#" className="hover:text-primary transition-smooth">Blog</a></li>
+              <li><Link to="/blog" className="hover:text-primary transition-smooth">Blog</Link></li>
               <li><a href="#" className="hover:text-primary transition-smooth">Política de Privacidade</a></li>
             </ul>
           </div>

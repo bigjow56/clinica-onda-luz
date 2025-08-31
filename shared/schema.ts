@@ -52,6 +52,20 @@ export const appointments = pgTable("appointments", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Blog posts/publications table
+export const blogPosts = pgTable("blog_posts", {
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  excerpt: text("excerpt"), // Short summary for listing pages
+  featuredImageUrl: text("featured_image_url"),
+  category: text("category").default("promocao").$type<"evento" | "promocao">(),
+  status: text("status").default("published").$type<"draft" | "published" | "archived">(),
+  authorId: uuid("author_id").references(() => adminUsers.id),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 // Schema validation
 export const insertAdminUserSchema = createInsertSchema(adminUsers).pick({
   email: true,
@@ -72,6 +86,13 @@ export const updateTeamMemberSchema = insertTeamMemberSchema.partial();
 export const insertAppointmentSchema = createInsertSchema(appointments);
 export const updateAppointmentSchema = insertAppointmentSchema.partial();
 
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export const updateBlogPostSchema = insertBlogPostSchema.partial();
+
 // Types
 export type InsertAdminUser = z.infer<typeof insertAdminUserSchema>;
 export type AdminUser = z.infer<typeof selectAdminUserSchema>;
@@ -81,3 +102,5 @@ export type InsertTeamMember = z.infer<typeof insertTeamMemberSchema>;
 export type TeamMember = typeof teamMembers.$inferSelect;
 export type InsertAppointment = z.infer<typeof insertAppointmentSchema>;
 export type Appointment = typeof appointments.$inferSelect;
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type BlogPost = typeof blogPosts.$inferSelect;

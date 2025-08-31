@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AdminSiteSettings } from "@/components/admin/AdminSiteSettings";
 import { AdminTeamManagement } from "@/components/admin/AdminTeamManagement";
 import { AdminAppointments } from "@/components/admin/AdminAppointments";
-import { LogOut, Settings, Users, Calendar, Home } from "lucide-react";
+import AdminBlogPosts from "@/components/admin/AdminBlogPosts";
+import { LogOut, Settings, Users, Calendar, Home, FileText } from "lucide-react";
 
 export default function AdminDashboard() {
   const { user, isAdmin, loading, signOut } = useAuth();
@@ -74,7 +75,7 @@ export default function AdminDashboard() {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="site" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="site" className="flex items-center gap-2">
               <Settings className="w-4 h-4" />
               Configurações do Site
@@ -86,6 +87,10 @@ export default function AdminDashboard() {
             <TabsTrigger value="appointments" className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
               Agendamentos
+            </TabsTrigger>
+            <TabsTrigger value="blog" className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              Publicações
             </TabsTrigger>
           </TabsList>
 
@@ -129,6 +134,10 @@ export default function AdminDashboard() {
                 <AdminAppointments />
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="blog" className="space-y-6">
+            <AdminBlogPosts />
           </TabsContent>
         </Tabs>
       </main>

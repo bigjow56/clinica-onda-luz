@@ -1,11 +1,11 @@
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
+import { db } from "./db";
 import { 
   adminUsers, 
   siteSettings, 
   teamMembers, 
   appointments,
+  blogPosts,
   type AdminUser, 
   type InsertAdminUser,
   type SiteSettings,
@@ -13,15 +13,15 @@ import {
   type TeamMember,
   type InsertTeamMember,
   type Appointment,
-  type InsertAppointment
+  type InsertAppointment,
+  type BlogPost,
+  type InsertBlogPost
 } from "@shared/schema";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is required");
 }
 
-const sql = neon(process.env.DATABASE_URL);
-export const db = drizzle(sql);
 
 export interface IStorage {
   // Admin users
@@ -46,6 +46,13 @@ export interface IStorage {
   createAppointment(appointment: InsertAppointment): Promise<Appointment>;
   updateAppointment(id: string, appointment: Partial<Appointment>): Promise<Appointment | undefined>;
   deleteAppointment(id: string): Promise<boolean>;
+  
+  // Blog posts
+  getBlogPosts(): Promise<BlogPost[]>;
+  getBlogPost(id: string): Promise<BlogPost | undefined>;
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  updateBlogPost(id: string, post: Partial<BlogPost>): Promise<BlogPost | undefined>;
+  deleteBlogPost(id: string): Promise<boolean>;
 }
 
 export class PostgresStorage implements IStorage {
@@ -154,6 +161,35 @@ export class PostgresStorage implements IStorage {
 
   async deleteAppointment(id: string): Promise<boolean> {
     const result = await db.delete(appointments).where(eq(appointments.id, id)).returning();
+    return result.length > 0;
+  }
+
+  // Blog posts
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return await db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+  }
+
+  async getBlogPost(id: string): Promise<BlogPost | undefined> {
+    const result = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
+    return result[0];
+  }
+
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    const result = await db.insert(blogPosts).values(post).returning();
+    return result[0];
+  }
+
+  async updateBlogPost(id: string, post: Partial<BlogPost>): Promise<BlogPost | undefined> {
+    const result = await db
+      .update(blogPosts)
+      .set({ ...post, updatedAt: new Date() })
+      .where(eq(blogPosts.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async deleteBlogPost(id: string): Promise<boolean> {
+    const result = await db.delete(blogPosts).where(eq(blogPosts.id, id)).returning();
     return result.length > 0;
   }
 }
