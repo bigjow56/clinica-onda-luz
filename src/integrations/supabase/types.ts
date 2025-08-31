@@ -14,7 +14,138 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_users: {
+        Row: {
+          created_at: string
+          id: string
+          role: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      appointments: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          patient_email: string
+          patient_name: string
+          patient_phone: string
+          preferred_date: string
+          preferred_time: string
+          service_type: string
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          patient_email: string
+          patient_name: string
+          patient_phone: string
+          preferred_date: string
+          preferred_time: string
+          service_type: string
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          patient_email?: string
+          patient_name?: string
+          patient_phone?: string
+          preferred_date?: string
+          preferred_time?: string
+          service_type?: string
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          created_at: string
+          hero_description: string
+          hero_image_url: string | null
+          hero_title: string
+          id: string
+          site_name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          hero_description?: string
+          hero_image_url?: string | null
+          hero_title?: string
+          id?: string
+          site_name?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          hero_description?: string
+          hero_image_url?: string | null
+          hero_title?: string
+          id?: string
+          site_name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          created_at: string
+          credentials: string
+          display_order: number | null
+          experience_years: number
+          id: string
+          image_url: string | null
+          name: string
+          specialties: string[] | null
+          specialty: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          credentials: string
+          display_order?: number | null
+          experience_years: number
+          id?: string
+          image_url?: string | null
+          name: string
+          specialties?: string[] | null
+          specialty: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          credentials?: string
+          display_order?: number | null
+          experience_years?: number
+          id?: string
+          image_url?: string | null
+          name?: string
+          specialties?: string[] | null
+          specialty?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
