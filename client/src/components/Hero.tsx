@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-dental-clinic.jpg";
 import { AppointmentModal } from "@/components/AppointmentModal";
-import { supabase } from "@/integrations/supabase/client";
+import { apiClient } from "@/lib/api";
 
 const Hero = () => {
   const [appointmentOpen, setAppointmentOpen] = useState(false);
   const [siteSettings, setSiteSettings] = useState({
-    site_name: 'DentalCare',
-    hero_title: 'Seu sorriso é nossa prioridade',
-    hero_description: 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
-    hero_image_url: ''
+    siteName: 'DentalCare',
+    heroTitle: 'Seu sorriso é nossa prioridade',
+    heroDescription: 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
+    heroImageUrl: ''
   });
 
   useEffect(() => {
@@ -20,18 +20,14 @@ const Hero = () => {
 
   const loadSiteSettings = async () => {
     try {
-      const { data } = await supabase
-        .from('site_settings')
-        .select('*')
-        .limit(1)
-        .maybeSingle();
-
+      const data = await apiClient.getSiteSettings();
+      
       if (data) {
         setSiteSettings({
-          site_name: data.site_name || 'DentalCare',
-          hero_title: data.hero_title || 'Seu sorriso é nossa prioridade',
-          hero_description: data.hero_description || 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
-          hero_image_url: data.hero_image_url || ''
+          siteName: data.siteName || 'DentalCare',
+          heroTitle: data.heroTitle || 'Seu sorriso é nossa prioridade',
+          heroDescription: data.heroDescription || 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
+          heroImageUrl: data.heroImageUrl || ''
         });
       }
     } catch (error) {
@@ -46,13 +42,13 @@ const Hero = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-                {siteSettings.hero_title.split(' ').slice(0, -1).join(' ')}{" "}
+                {siteSettings.heroTitle.split(' ').slice(0, -1).join(' ')}{" "}
                 <span className="bg-hero-gradient bg-clip-text text-transparent">
-                  {siteSettings.hero_title.split(' ').slice(-1)[0]}
+                  {siteSettings.heroTitle.split(' ').slice(-1)[0]}
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                {siteSettings.hero_description}
+                {siteSettings.heroDescription}
               </p>
             </div>
 

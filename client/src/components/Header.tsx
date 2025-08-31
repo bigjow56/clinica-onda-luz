@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Phone, MapPin, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { apiClient } from "@/lib/api";
 
 function DynamicSiteName() {
   const [siteName, setSiteName] = useState('DentalCare');
@@ -9,14 +9,9 @@ function DynamicSiteName() {
   useEffect(() => {
     const loadSiteName = async () => {
       try {
-        const { data } = await supabase
-          .from('site_settings')
-          .select('site_name')
-          .limit(1)
-          .maybeSingle();
-
-        if (data?.site_name) {
-          setSiteName(data.site_name);
+        const data = await apiClient.getSiteSettings();
+        if (data?.siteName) {
+          setSiteName(data.siteName);
         }
       } catch (error) {
         console.error('Error loading site name:', error);

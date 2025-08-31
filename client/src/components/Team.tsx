@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import dentistPortrait from "@/assets/dentist-portrait.jpg";
-import { supabase } from "@/integrations/supabase/client";
+import { apiClient } from "@/lib/api";
 
 interface TeamMember {
   id: string;
   name: string;
   specialty: string;
-  experience_years: number;
+  experienceYears: number;
   credentials: string;
-  image_url?: string;
+  imageUrl?: string;
   specialties: string[];
-  display_order: number;
+  displayOrder: number;
 }
 
 const Team = () => {
@@ -25,12 +25,7 @@ const Team = () => {
 
   const loadTeamMembers = async () => {
     try {
-      const { data, error } = await supabase
-        .from('team_members')
-        .select('*')
-        .order('display_order');
-
-      if (error) throw error;
+      const data = await apiClient.getTeamMembers();
       setTeamMembers(data || []);
     } catch (error) {
       console.error('Error loading team members:', error);
@@ -74,7 +69,7 @@ const Team = () => {
             <Card key={member.id} className="overflow-hidden hover:shadow-card transition-smooth border-border group">
               <div className="relative overflow-hidden">
                 <img
-                  src={member.image_url || dentistPortrait}
+                  src={member.imageUrl || dentistPortrait}
                   alt={member.name}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-smooth"
                 />
@@ -89,7 +84,7 @@ const Team = () => {
                   {member.specialty}
                 </p>
                 <p className="text-muted-foreground text-sm mb-3">
-                  {member.experience_years} anos de experiência
+                  {member.experienceYears} anos de experiência
                 </p>
                 <p className="text-muted-foreground text-sm mb-4">
                   {member.credentials}

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { supabase } from "@/integrations/supabase/client";
+import { apiClient } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { Save } from "lucide-react";
 
@@ -11,10 +11,10 @@ export function AdminSiteSettings() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState({
-    site_name: '',
-    hero_title: '',
-    hero_description: '',
-    hero_image_url: ''
+    siteName: '',
+    heroTitle: '',
+    heroDescription: '',
+    heroImageUrl: ''
   });
   const { toast } = useToast();
 
@@ -25,20 +25,14 @@ export function AdminSiteSettings() {
   const loadSettings = async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('site_settings')
-        .select('*')
-        .limit(1)
-        .maybeSingle();
-
-      if (error) throw error;
-
+      const data = await apiClient.getSiteSettings();
+      
       if (data) {
         setSettings({
-          site_name: data.site_name || '',
-          hero_title: data.hero_title || '',
-          hero_description: data.hero_description || '',
-          hero_image_url: data.hero_image_url || ''
+          siteName: data.siteName || '',
+          heroTitle: data.heroTitle || '',
+          heroDescription: data.heroDescription || '',
+          heroImageUrl: data.heroImageUrl || ''
         });
       }
     } catch (error) {
@@ -56,33 +50,11 @@ export function AdminSiteSettings() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Check if settings exist
-      const { data: existing } = await supabase
-        .from('site_settings')
-        .select('id')
-        .limit(1)
-        .maybeSingle();
-
-      if (existing) {
-        // Update existing
-        const { error } = await supabase
-          .from('site_settings')
-          .update(settings)
-          .eq('id', existing.id);
-        
-        if (error) throw error;
-      } else {
-        // Insert new
-        const { error } = await supabase
-          .from('site_settings')
-          .insert([settings]);
-        
-        if (error) throw error;
-      }
-
+      await apiClient.updateSiteSettings(settings);
+      
       toast({
         title: "Configurações salvas!",
-        description: "As mudanças foram aplicadas com sucesso.",
+        description: "As alterações foram aplicadas com sucesso.",
       });
     } catch (error) {
       console.error('Error saving settings:', error);
@@ -108,42 +80,42 @@ export function AdminSiteSettings() {
     <div className="space-y-6">
       <div className="grid gap-4">
         <div className="space-y-2">
-          <Label htmlFor="site_name">Nome do Site</Label>
+          <Label htmlFor="siteName">Nome do Site</Label>
           <Input
-            id="site_name"
-            value={settings.site_name}
-            onChange={(e) => setSettings({...settings, site_name: e.target.value})}
+            id="siteName"
+            value={settings.siteName}
+            onChange={(e) => setSettings({...settings, siteName: e.target.value})}
             placeholder="Ex: DentalCare"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="hero_title">Título Principal</Label>
+          <Label htmlFor="heroTitle">Título Principal</Label>
           <Input
-            id="hero_title"
-            value={settings.hero_title}
-            onChange={(e) => setSettings({...settings, hero_title: e.target.value})}
+            id="heroTitle"
+            value={settings.heroTitle}
+            onChange={(e) => setSettings({...settings, heroTitle: e.target.value})}
             placeholder="Ex: Seu sorriso é nossa prioridade"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="hero_description">Descrição Principal</Label>
+          <Label htmlFor="heroDescription">Descrição Principal</Label>
           <Textarea
-            id="hero_description"
-            value={settings.hero_description}
-            onChange={(e) => setSettings({...settings, hero_description: e.target.value})}
+            id="heroDescription"
+            value={settings.heroDescription}
+            onChange={(e) => setSettings({...settings, heroDescription: e.target.value})}
             placeholder="Descrição que aparece na página inicial"
             rows={4}
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="hero_image_url">URL da Imagem Principal (opcional)</Label>
+          <Label htmlFor="heroImageUrl">URL da Imagem Principal (opcional)</Label>
           <Input
-            id="hero_image_url"
-            value={settings.hero_image_url}
-            onChange={(e) => setSettings({...settings, hero_image_url: e.target.value})}
+            id="heroImageUrl"
+            value={settings.heroImageUrl}
+            onChange={(e) => setSettings({...settings, heroImageUrl: e.target.value})}
             placeholder="https://exemplo.com/imagem.jpg"
           />
         </div>
