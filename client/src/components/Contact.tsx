@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { AppointmentModal } from "@/components/AppointmentModal";
 import { 
   MapPin, 
   Phone, 
@@ -16,6 +17,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -65,6 +67,23 @@ const Contact = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
+              <div className="text-center py-8">
+                <p className="text-muted-foreground mb-6">
+                  Clique no botão abaixo para abrir o formulário completo de agendamento com seleção de data, horário e serviço.
+                </p>
+                <Button 
+                  onClick={() => setAppointmentOpen(true)}
+                  variant="hero" 
+                  size="lg"
+                  className="w-full"
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Agendar Consulta Online
+                </Button>
+              </div>
+              
+              <div className="border-t pt-8 mt-8">
+                <h3 className="text-lg font-semibold mb-4">Ou envie uma mensagem:</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -137,6 +156,7 @@ const Contact = () => {
                   Enviar Mensagem
                 </Button>
               </form>
+              </div>
             </CardContent>
           </Card>
 
@@ -236,6 +256,11 @@ const Contact = () => {
             </Card>
           </div>
         </div>
+        
+        <AppointmentModal 
+          open={appointmentOpen} 
+          onOpenChange={setAppointmentOpen} 
+        />
       </div>
     </section>
   );

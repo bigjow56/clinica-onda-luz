@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, Phone, MapPin, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { apiClient } from "@/lib/api";
+import { AppointmentModal } from "@/components/AppointmentModal";
 
 function DynamicSiteName() {
   const [siteName, setSiteName] = useState('DentalCare');
@@ -30,6 +31,7 @@ function DynamicSiteName() {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
 
   return (
     <header className="bg-background/95 backdrop-blur-md sticky top-0 z-50 border-b">
@@ -78,7 +80,11 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button variant="default" className="hidden md:inline-flex">
+            <Button 
+              variant="default" 
+              className="hidden md:inline-flex"
+              onClick={() => setAppointmentOpen(true)}
+            >
               Agendar Consulta
             </Button>
             
@@ -113,12 +119,21 @@ const Header = () => {
               <a href="#contact" className="text-foreground hover:text-primary transition-smooth">
                 Contato
               </a>
-              <Button variant="default" className="w-full mt-2">
+              <Button 
+                variant="default" 
+                className="w-full mt-2"
+                onClick={() => setAppointmentOpen(true)}
+              >
                 Agendar Consulta
               </Button>
             </div>
           </div>
         )}
+        
+        <AppointmentModal 
+          open={appointmentOpen} 
+          onOpenChange={setAppointmentOpen} 
+        />
       </div>
     </header>
   );
