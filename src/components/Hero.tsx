@@ -1,8 +1,44 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-dental-clinic.jpg";
+import { AppointmentModal } from "@/components/AppointmentModal";
+import { supabase } from "@/integrations/supabase/client";
 
 const Hero = () => {
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
+  const [siteSettings, setSiteSettings] = useState({
+    site_name: 'DentalCare',
+    hero_title: 'Seu sorriso é nossa prioridade',
+    hero_description: 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
+    hero_image_url: ''
+  });
+
+  useEffect(() => {
+    loadSiteSettings();
+  }, []);
+
+  const loadSiteSettings = async () => {
+    try {
+      const { data } = await supabase
+        .from('site_settings')
+        .select('*')
+        .limit(1)
+        .maybeSingle();
+
+      if (data) {
+        setSiteSettings({
+          site_name: data.site_name || 'DentalCare',
+          hero_title: data.hero_title || 'Seu sorriso é nossa prioridade',
+          hero_description: data.hero_description || 'Oferecemos cuidados odontológicos modernos e personalizados para toda a família. Tecnologia avançada e atendimento humanizado.',
+          hero_image_url: data.hero_image_url || ''
+        });
+      }
+    } catch (error) {
+      console.error('Error loading site settings:', error);
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-soft-gradient">
       <div className="container mx-auto px-4 py-20">
@@ -10,19 +46,22 @@ const Hero = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-                Seu sorriso é nossa{" "}
+                {siteSettings.hero_title.split(' ').slice(0, -1).join(' ')}{" "}
                 <span className="bg-hero-gradient bg-clip-text text-transparent">
-                  prioridade
+                  {siteSettings.hero_title.split(' ').slice(-1)[0]}
                 </span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Oferecemos cuidados odontológicos modernos e personalizados 
-                para toda a família. Tecnologia avançada e atendimento humanizado.
+                {siteSettings.hero_description}
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="lg">
+              <Button 
+                variant="hero" 
+                size="lg"
+                onClick={() => setAppointmentOpen(true)}
+              >
                 Agendar Consulta
               </Button>
               <Button variant="outline" size="lg">
@@ -49,8 +88,8 @@ const Hero = () => {
           <div className="relative">
             <div className="relative overflow-hidden rounded-2xl shadow-hero">
               <img
-                src={heroImage}
-                alt="Clínica DentalCare - Ambiente moderno e acolhedor"
+                src={siteSettings.hero_image_url || heroImage}
+                alt={`Clínica ${siteSettings.site_name} - Ambiente moderno e acolhedor`}
                 className="w-full h-auto object-cover"
               />
             </div>
@@ -71,6 +110,11 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      
+      <AppointmentModal 
+        open={appointmentOpen} 
+        onOpenChange={setAppointmentOpen} 
+      />
     </section>
   );
 };

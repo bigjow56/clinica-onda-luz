@@ -1,34 +1,60 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import dentistPortrait from "@/assets/dentist-portrait.jpg";
+import { supabase } from "@/integrations/supabase/client";
+
+interface TeamMember {
+  id: string;
+  name: string;
+  specialty: string;
+  experience_years: number;
+  credentials: string;
+  image_url?: string;
+  specialties: string[];
+  display_order: number;
+}
 
 const Team = () => {
-  const teamMembers = [
-    {
-      name: "Dra. Ana Carolina Silva",
-      specialty: "Ortodontia e Odontopediatria",
-      experience: "12 anos de experiência",
-      education: "CRO-SP 45.123 | Especialista USP",
-      image: dentistPortrait,
-      specialties: ["Ortodontia", "Odontopediatria", "Estética"]
-    },
-    {
-      name: "Dr. Rafael Santos",
-      specialty: "Implantodontia e Cirurgia",
-      experience: "15 anos de experiência",
-      education: "CRO-SP 38.456 | Mestrado UNICAMP",
-      image: dentistPortrait,
-      specialties: ["Implantes", "Cirurgia", "Próteses"]
-    },
-    {
-      name: "Dra. Marina Costa",
-      specialty: "Endodontia e Estética",
-      experience: "10 anos de experiência",
-      education: "CRO-SP 52.789 | Especialista PUC",
-      image: dentistPortrait,
-      specialties: ["Endodontia", "Estética", "Clareamento"]
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadTeamMembers();
+  }, []);
+
+  const loadTeamMembers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('team_members')
+        .select('*')
+        .order('display_order');
+
+      if (error) throw error;
+      setTeamMembers(data || []);
+    } catch (error) {
+      console.error('Error loading team members:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  if (loading) {
+    return (
+      <section id="team" className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
+              Nossa <span className="bg-hero-gradient bg-clip-text text-transparent">Equipe</span>
+            </h2>
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="team" className="py-20 bg-background">
@@ -44,11 +70,11 @@ const Team = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {teamMembers.map((member, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-card transition-smooth border-border group">
+          {teamMembers.map((member) => (
+            <Card key={member.id} className="overflow-hidden hover:shadow-card transition-smooth border-border group">
               <div className="relative overflow-hidden">
                 <img
-                  src={member.image}
+                  src={member.image_url || dentistPortrait}
                   alt={member.name}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-smooth"
                 />
@@ -63,10 +89,10 @@ const Team = () => {
                   {member.specialty}
                 </p>
                 <p className="text-muted-foreground text-sm mb-3">
-                  {member.experience}
+                  {member.experience_years} anos de experiência
                 </p>
                 <p className="text-muted-foreground text-sm mb-4">
-                  {member.education}
+                  {member.credentials}
                 </p>
                 
                 <div className="flex flex-wrap gap-2">

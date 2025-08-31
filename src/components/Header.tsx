@@ -1,6 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Menu, Phone, MapPin, Clock } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+function DynamicSiteName() {
+  const [siteName, setSiteName] = useState('DentalCare');
+
+  useEffect(() => {
+    const loadSiteName = async () => {
+      try {
+        const { data } = await supabase
+          .from('site_settings')
+          .select('site_name')
+          .limit(1)
+          .maybeSingle();
+
+        if (data?.site_name) {
+          setSiteName(data.site_name);
+        }
+      } catch (error) {
+        console.error('Error loading site name:', error);
+      }
+    };
+
+    loadSiteName();
+  }, []);
+
+  return (
+    <span className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
+      {siteName}
+    </span>
+  );
+}
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,9 +60,7 @@ const Header = () => {
         {/* Main navigation */}
         <nav className="flex items-center justify-between py-4">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
-              DentalCare
-            </h1>
+            <DynamicSiteName />
           </div>
 
           {/* Desktop navigation */}
