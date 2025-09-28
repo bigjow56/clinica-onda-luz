@@ -78,7 +78,7 @@ export class PostgresStorage implements IStorage {
   }
 
   async createAdminUser(user: InsertAdminUser): Promise<AdminUser> {
-    const result = await db.insert(adminUsers).values(user).returning({
+    const result = await db.insert(adminUsers).values([user]).returning({
       id: adminUsers.id,
       email: adminUsers.email,
       role: adminUsers.role,
@@ -146,7 +146,7 @@ export class PostgresStorage implements IStorage {
   }
 
   async createAppointment(appointment: InsertAppointment): Promise<Appointment> {
-    const result = await db.insert(appointments).values(appointment).returning();
+    const result = await db.insert(appointments).values([appointment]).returning();
     return result[0];
   }
 
@@ -175,7 +175,7 @@ export class PostgresStorage implements IStorage {
   }
 
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
-    const result = await db.insert(blogPosts).values(post).returning();
+    const result = await db.insert(blogPosts).values([post]).returning();
     return result[0];
   }
 

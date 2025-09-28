@@ -105,7 +105,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/auth/me", authenticateAdmin, async (req, res) => {
+  app.get("/api/auth/me", authenticateAdmin, async (req: any, res) => {
     res.json({ user: req.user });
   });
 
