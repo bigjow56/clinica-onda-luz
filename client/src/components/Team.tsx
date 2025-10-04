@@ -40,7 +40,7 @@ const Team = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-8 md:mb-12 lg:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
-              Nossa <span className="text-primary">Equipe</span>
+              Nossa Equipe
             </h2>
             <div className="flex items-center justify-center">
               <div className="animate-spin rounded-full h-6 w-6 md:h-8 md:w-8 border-b-2 border-primary"></div>
@@ -56,7 +56,7 @@ const Team = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
-            Nossa <span className="text-primary">Equipe</span>
+            Nossa Equipe
           </h2>
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Profissionais altamente qualificados e experientes, 

@@ -58,7 +58,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            O que nossos <span className="text-primary">pacientes</span> dizem
+            O que nossos pacientes dizem
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A satisfação dos nossos pacientes é nossa maior recompensa. 
