@@ -36,7 +36,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-100 via-blue-50 to-green-100">
       <div className="container mx-auto px-4 py-16 md:py-20">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">
@@ -113,7 +113,7 @@ const Hero = () => {
                 className="w-full h-auto object-cover"
               />
               {/* Overlay colorido suave */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-green-500/10"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-green-500/20"></div>
             </div>
             
             {/* Floating stats card - hidden on mobile */}
