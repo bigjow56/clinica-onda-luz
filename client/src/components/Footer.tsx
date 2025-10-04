@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl md:text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
+            <h3 className="text-xl md:text-2xl font-bold text-background">
               Clínica Excellence
             </h3>
             <p className="text-sm md:text-base text-background/80 leading-relaxed">

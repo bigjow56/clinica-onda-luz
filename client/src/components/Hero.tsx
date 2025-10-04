@@ -43,7 +43,7 @@ const Hero = () => {
             <div className="space-y-3 md:space-y-4">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 {siteSettings.heroTitle.split(' ').slice(0, -1).join(' ')}{" "}
-                <span className="bg-hero-gradient bg-clip-text text-transparent">
+                <span className="text-primary">
                   {siteSettings.heroTitle.split(' ').slice(-1)[0]}
                 </span>
               </h1>

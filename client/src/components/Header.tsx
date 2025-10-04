@@ -24,7 +24,7 @@ function DynamicSiteName() {
   }, []);
 
   return (
-    <span className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
+    <span className="text-2xl font-bold text-primary">
       {siteName}
     </span>
   );

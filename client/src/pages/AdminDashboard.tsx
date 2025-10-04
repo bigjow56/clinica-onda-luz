@@ -46,7 +46,7 @@ export default function AdminDashboard() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold bg-hero-gradient bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold text-primary">
                 Painel Administrativo
               </h1>
               <p className="text-muted-foreground">DentalCare Management</p>
