@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Calendar, Eye, Star, Award, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-dental-reception.png";
 import { AppointmentModal } from "@/components/AppointmentModal";
 import { apiClient } from "@/lib/api";
@@ -36,15 +36,15 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center bg-soft-gradient">
+    <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-green-50">
       <div className="container mx-auto px-4 py-16 md:py-20">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-6 md:space-y-8">
             <div className="space-y-3 md:space-y-4">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                {siteSettings.heroTitle}
+                Seu <span className="text-green-600">sorriso</span> é nossa prioridade
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 {siteSettings.heroDescription}
               </p>
             </div>
@@ -54,26 +54,47 @@ const Hero = () => {
                 variant="hero" 
                 size="lg"
                 onClick={() => setAppointmentOpen(true)}
+                className="shadow-xl hover:shadow-2xl"
               >
+                <Calendar className="w-5 h-5 mr-2" />
                 Agendar Consulta
               </Button>
-              <Button variant="hero" size="lg">
+              <Button variant="hero" size="lg" className="shadow-xl hover:shadow-2xl">
+                <Eye className="w-5 h-5 mr-2" />
                 Conhecer Serviços
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground font-medium">15+ Anos de Experiência</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground font-medium">Tecnologia Avançada</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground font-medium">Atendimento Humanizado</span>
+            {/* Badges de Confiança */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg border border-green-100">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-100 rounded-full">
+                    <Award className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-green-600">15+</div>
+                    <span className="text-xs md:text-sm text-gray-600">Anos de Experiência</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-100 rounded-full">
+                    <Star className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-blue-600">98%</div>
+                    <span className="text-xs md:text-sm text-gray-600">Satisfação</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-100 rounded-full">
+                    <Shield className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold text-green-600">5000+</div>
+                    <span className="text-xs md:text-sm text-gray-600">Pacientes</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -85,6 +106,8 @@ const Hero = () => {
                 alt={`Clínica ${siteSettings.siteName} - Ambiente moderno e acolhedor`}
                 className="w-full h-auto object-cover"
               />
+              {/* Overlay colorido suave */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-green-500/10"></div>
             </div>
             
             {/* Floating stats card - hidden on mobile */}
