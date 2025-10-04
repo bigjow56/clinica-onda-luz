@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import heroImage from "@/assets/hero-dental-clinic.jpg";
+import heroImage from "@/assets/hero-dental-reception.png";
 import { AppointmentModal } from "@/components/AppointmentModal";
 import { apiClient } from "@/lib/api";
 
@@ -88,7 +88,7 @@ const Hero = () => {
             </div>
             
             {/* Floating stats card - hidden on mobile */}
-            <div className="hidden md:block absolute -bottom-6 -left-6 bg-card rounded-xl shadow-card p-4 lg:p-6 border">
+            <div className="hidden md:block absolute -bottom-6 -right-6 bg-card rounded-xl shadow-card p-4 lg:p-6 border">
               <div className="grid grid-cols-2 gap-3 lg:gap-4 text-center">
                 <div>
                   <div className="text-xl lg:text-2xl font-bold text-primary">5000+</div>
