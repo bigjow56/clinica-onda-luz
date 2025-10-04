@@ -26,7 +26,7 @@ const Team = () => {
   const loadTeamMembers = async () => {
     try {
       const data = await apiClient.getTeamMembers();
-      setTeamMembers(data || []);
+      setTeamMembers(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Error loading team members:', error);
     } finally {
