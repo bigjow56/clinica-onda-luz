@@ -113,7 +113,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/site-settings", async (req, res) => {
     try {
       const settings = await storage.getSiteSettings();
-      res.json(settings);
+      res.json(settings || {});
     } catch (error) {
       console.error("Get site settings error:", error);
       res.status(500).json({ error: "Internal server error" });
