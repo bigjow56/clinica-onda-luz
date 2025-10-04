@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Calendar, Eye, Star, Award, Shield } from "lucide-react";
+import { Calendar, Eye, Star, Award, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-dental-reception.png";
 import { AppointmentModal } from "@/components/AppointmentModal";
 import { apiClient } from "@/lib/api";
@@ -42,7 +42,13 @@ const Hero = () => {
           <div className="space-y-6 md:space-y-8">
             <div className="space-y-3 md:space-y-4">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Seu <span className="text-green-600">sorriso</span> é nossa prioridade
+                {siteSettings.heroTitle.split(' ').map((word, index) => 
+                  word.toLowerCase() === 'sorriso' ? (
+                    <span key={index} className="text-green-600">{word} </span>
+                  ) : (
+                    word + ' '
+                  )
+                )}
               </h1>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 {siteSettings.heroDescription}
