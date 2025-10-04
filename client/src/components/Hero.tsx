@@ -57,7 +57,7 @@ const Hero = () => {
               >
                 Agendar Consulta
               </Button>
-              <Button variant="green" size="lg">
+              <Button variant="outline" size="lg">
                 Conhecer Serviços
               </Button>
             </div>
